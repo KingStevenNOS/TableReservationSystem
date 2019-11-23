@@ -6,22 +6,26 @@
         <a href="/" class="simple-text logo-mini">
           ERA
         </a>
-        <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+        <a href="/" class="simple-text logo-normal">
           Restaurant
         </a>
       </div>
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
-          <li class="active ">
-            <a href="./dashboard.html">
+          <li @if (Request::is('admin/dashboard'))
+              class="active"
+          @endif>
+            <a href="{{ route('admin.dashboard') }}">
               <i class="now-ui-icons design_app"></i>
               <p>Dashboard</p>
             </a>
           </li>
-          <li>
-            <a href="./icons.html">
-              <i class="now-ui-icons education_atom"></i>
-              <p>Icons</p>
+          <li @if (Request::is('admin/slider*'))
+              class="active"
+          @endif>
+            <a href="{{ route('slider.index') }}">
+              <i class="now-ui-icons design_bullet-list-67"></i>
+              <p>Sliders Tables</p>
             </a>
           </li>
           <li>
