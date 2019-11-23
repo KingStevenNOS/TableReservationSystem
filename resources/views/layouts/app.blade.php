@@ -23,8 +23,7 @@
 
 </head>
 <body>
-    <div id="app">
-        <div class="wrapper">
+    <div class="wrapper" id="app">
 
             @if (Request::is('admin*'))
             @include('layouts.partial.sidebar')
@@ -40,7 +39,6 @@
                 @if (Request::is('admin*'))
                     @include('layouts.partial.footer')
                 @endif
-            </div>
         </div>
     </div>    
     <!--   Core JS Files   -->
