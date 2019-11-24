@@ -39,6 +39,7 @@
                       <th class="text-right">
                         Updated At
                       </th>
+                      <th></th>
                     </thead>
                     <tbody>
                     @foreach ($sliders as $slider)
@@ -60,6 +61,9 @@
                         </td>
                         <td class="text-right">
                           {{ $slider->updated_at }}
+                        </td>
+                        <td>
+                            <a href="{{ route('slider.edit',$slider) }}" class="btn btn-black" style="color:white">Edit</a>
                         </td>
                       </tr>
                     @endforeach

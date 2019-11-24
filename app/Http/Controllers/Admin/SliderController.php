@@ -41,7 +41,7 @@ class SliderController extends Controller
         $this->validate($request,[
             'title' => 'required',
             'sub_title' => 'required',
-            'image' => 'required|mimes:jpeg,jpg,bmp.png|max:1500',
+            'image' => 'mimes:jpeg,jpg,bmp.png|max:1500',
         ]);
         $image = $request->file('image');
         $slug = str_slug($request->title);
@@ -84,7 +84,8 @@ class SliderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $slider = Slider::find($id);
+        return view('admin.slider.edit')->with('slider',$slider);
     }
 
     /**
@@ -96,7 +97,30 @@ class SliderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'sub_title' => 'required',
+            'image' => 'mimes:jpeg,jpg,bmp.png|max:1500',
+        ]);
+        $image = $request->file('image');
+        $slug = str_slug($request->title);
+        $slider = Slider::find($id);
+        if (isset($image)) {
+            $currentDate = Carbon::now()->toDateString();
+            $imagename = $slug . '-' . $currentDate . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
+
+            $path = $request->file('image')->storeAs('public/sliders', $imagename);
+        } else {
+            $imagename = $slider->image;
+        }
+
+        $slider->title = $request->title;
+        $slider->sub_title = $request->sub_title;
+        $slider->image = $imagename;
+        $slider->save();
+        return redirect()->route('slider.index')->with('successMsg', 'Slider Successfully Updated');
+
+
     }
 
     /**
