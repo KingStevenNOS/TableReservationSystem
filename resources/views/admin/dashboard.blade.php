@@ -2,13 +2,10 @@
 
 @section('title', 'Dashboard')
     @push('css')
-        
+
     @endpush
 
     @section('content')
-    <div class="panel-header panel-header-lg">
-      <canvas id="bigDashboardChart"></canvas>
-    </div>
     <div class="content">
       <div class="row">
         <div class="col-lg-4">
@@ -146,7 +143,8 @@
                             </label>
                           </div>
                         </td>
-                        <td class="text-left">Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                        <td class="text-left">
+                            Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
                         </td>
                         <td class="td-actions text-right">
                           <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
@@ -274,5 +272,5 @@
     @endsection
 
     @push('scripts')
-        
+
     @endpush

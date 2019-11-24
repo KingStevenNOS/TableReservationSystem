@@ -9,7 +9,6 @@
 @endpush
 
 @section('content')
-<div class="panel-header panel-header-sm"></div>
 <div class="content">
         <div class="row">
           <div class="col-md-12">
@@ -63,7 +62,23 @@
                           {{ $slider->updated_at }}
                         </td>
                         <td>
-                            <a href="{{ route('slider.edit',$slider) }}" class="btn btn-black" style="color:white">Edit</a>
+                            <td>
+                                <a href="{{ route('slider.edit',$slider) }}" class="btn btn-success" style="color:white">Edit</a>
+                            </td>
+                            <td>
+                                <a href="{{ route('slider.edit',$slider) }}" class="btn btn-danger" style="color:white" onclick="if(confirm('Are You Sure You want to delete this?')){
+                                    event.preventDefault();
+                                    document.getElementById('delete-form-{{ $slider->id }}').submit();
+                                }else{
+                                    event.preventDefault();
+                                }">Delete</a>
+                                <form id="delete-form-{{ $slider->id }}" action="{{ route('slider.destroy', $slider) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                </form>
+
+                            </td>
+
                         </td>
                       </tr>
                     @endforeach

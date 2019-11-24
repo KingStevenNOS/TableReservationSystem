@@ -2836,7 +2836,12 @@ Created using IcoMoon - icomoon.io
 
 .off-canvas-sidebar .nav > li > a:focus {
   background: rgba(200, 200, 200, 0.2); }
-
+.centre-panel{
+    padding: 0 30px 30px;
+    min-height: calc(100vh - 123px);
+    margin-top: -30px;
+    ;
+}
 .main-panel {
   position: relative;
   float: right;

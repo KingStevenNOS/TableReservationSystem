@@ -24,17 +24,29 @@
 </head>
 <body>
     <div class="wrapper" id="app">
+
         @if (Request::is('admin*'))
             @include('layouts.partial.sidebar')
         @endif
-        <div class="main-panel"id="main-panel" >
+
             @if (Request::is('admin*'))
+            <div class="main-panel"id="main-panel" >
                 @include('layouts.partial.topbar')
             @endif
+            @if(Request::is('admin/dashboard'))
+                <div class="panel-header panel-header-lg">
+                    <canvas id="bigDashboardChart"></canvas>
+                </div>
+            @else
+                <div class=" panel-header panel-header-sm"></div>
+            @endif
 
-            <div class="content">
+            <div class="centre-panel">
+                <div class="content">
                 @yield('content')
             </div>
+            </div>
+
             @if (Request::is('admin*'))
                 @include('layouts.partial.footer')
             @endif

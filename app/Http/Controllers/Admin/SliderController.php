@@ -41,7 +41,7 @@ class SliderController extends Controller
         $this->validate($request,[
             'title' => 'required',
             'sub_title' => 'required',
-            'image' => 'mimes:jpeg,jpg,bmp.png|max:1500',
+            'image' => 'mimes:jpeg,jpg,bmp,png|max:1500',
         ]);
         $image = $request->file('image');
         $slug = str_slug($request->title);
@@ -131,6 +131,13 @@ class SliderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $slider = Slider::find($id);
+
+        if (file_exists('storage/sliders/' . $slider->image)) {
+            unlink ('storage/sliders/'.$slider->image);
+        }
+        $slider->delete();
+        return redirect()->back()->with('successMsg','Slider Successfully Deleted');
+
     }
 }
