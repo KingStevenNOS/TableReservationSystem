@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Menu;
+use App\Order;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
@@ -34,7 +36,14 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        foreach ($request->food as $food_name) {
+            $food = Menu::find($food_name);
+            $order = new Order();
+            $order->food = $food->id;
+            $order->save();
+        }
+        return redirect()->back()->with('successMsg', 'Your order has been sent');
     }
 
     /**

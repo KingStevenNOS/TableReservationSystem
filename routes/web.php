@@ -24,5 +24,6 @@ Route::group(['prefix'=>'admin','middleware'=>'auth','namespace'=>'admin'],funct
     Route::resource('slider' , 'SliderController');
     Route::resource('menu' , 'MenusController');
     Route::resource('category', 'CategoriesController');
+    Route::resource('order', 'OrdersController');
 
 });
