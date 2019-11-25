@@ -11,11 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','HomeController@index')->name('welcome');
 
 Auth::routes();
+
+Route::redirect('admin','admin/dashboard');
 
 
 

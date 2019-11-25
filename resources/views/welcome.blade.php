@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Appetizer - Free Bootstrap 4 Template by Colorlib</title>
+    <title>ERA Restaurant</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Monoton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Miss+Fajardose&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('frontend/css/open-iconic-bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/animate.css') }}">
-    
+
     <link rel="stylesheet" href="{{ asset('frontend/css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/owl.theme.default.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/magnific-popup.css') }}">
@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap-datepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/jquery.timepicker.css') }}">
 
-    
+
     <link rel="stylesheet" href="{{ asset('frontend/css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/icomoon.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
@@ -36,11 +36,11 @@
 		    		<div class="row d-flex">
 		    			<div class="col-md pr-4 d-flex topper align-items-center">
 					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
-						    <span class="text">+ 1235 2355 98</span>
+						    <span class="text">+254 728 557 412</span>
 					    </div>
 					    <div class="col-md pr-4 d-flex topper align-items-center">
 					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
-						    <span class="text">youremail@email.com</span>
+						    <span class="text">info@era.eat</span>
 					    </div>
 					    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right justify-content-end">
 						    <p class="mb-0 register-link"><span>Open hours:</span> <span>Monday - Sunday</span> <span>8:00AM - 9:00PM</span></p>
@@ -52,43 +52,83 @@
     </div>
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="index.html">Appetizer</a>
+	      <a class="navbar-brand" href="{{ route('welcome') }}">ERA</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	        	<li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-	        	<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-	        	<li class="nav-item"><a href="menu.html" class="nav-link">Menu</a></li>
-	        	<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-	          <li class="nav-item cta"><a href="reservation.html" class="nav-link">Book a table</a></li>
+	        	<li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+	        	<li class="nav-item"><a href="#" class="nav-link">About</a></li>
+	        	<li class="nav-item"><a href="#" class="nav-link">Menu</a></li>
+	        	<li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+	          <li class="nav-item cta "><a href="{{ route('welcome') }}" class="nav-link">Book a table</a></li>
 	        </ul>
 	      </div>
 	    </div>
 	  </nav>
     <!-- END nav -->
-    
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('https://image.shutterstock.com/image-photo/frame-organic-food-fresh-raw-260nw-506516848.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text align-items-end justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
             <h1 class="mb-2 bread">Reservation</h1>
-            <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Reservation <i class="ion-ios-arrow-forward"></i></span></p>
+            <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('welcome') }}">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Reservation <i class="ion-ios-arrow-forward"></i></span></p>
           </div>
         </div>
       </div>
     </section>
-	
-		<section class="ftco-section ftco-no-pt ftco-no-pb">
+    <section class="ftco-section">
+    	<div class="container-fluid px-4">
+    		<div class="row justify-content-center mb-5 pb-2">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+          	<span class="subheading">Specialties</span>
+            <h2 class="mb-4">Our Menu</h2>
+          </div>
+        </div>
+        @foreach ($categories as $category)
+
+
+            <div class="row">
+                <div class="col-md-6 col-lg-4 menu-wrap">
+                    <div class="heading-menu text-center ftco-animate">
+                        <h3>{{ $category->category }}</h3>
+                    </div>
+
+                    @foreach ($menus as $menu)
+                    @if ($menu->category == $category->category)
+                           <div class="menus d-flex ftco-animate">
+                               <div class="menu-img img" style="background-image: url(Storage/menus/{{ ($menu->image) }});"></div>
+                               <div class="text">
+                                   <div class="d-flex">
+                                       <div class="one-half">
+                                           <h3>{{ $menu->food_name }}</h3>
+                                        </div>
+                                        <div class="one-forth">
+                                            <span class="price"><p><span>KES</span></p>{{ $menu->price }}</span>
+                                        </div>
+                                    </div>
+                                    <p><span>{{ $menu->food_description }}</span></p>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+        @endforeach
+        </div>
+        </section>
+
+		<section class="ftco-section">
 			<div class="container-fluid px-0">
 				<div class="row d-flex no-gutters">
-          <div class="col-md-6 order-md-last ftco-animate makereservation p-4 p-md-5 pt-5">
+          <div class="col-md-12 order-md-last ftco-animate makereservation p-4 p-md-5 pt-5" >
           	<div class="py-md-5">
-	          	<div class="heading-section ftco-animate mb-5">
+	          	<div class="col-md-12 text-center heading-section ftco-animate">
 		          	<span class="subheading">Book a table</span>
 		            <h2 class="mb-4">Make Reservation</h2>
 		          </div>
@@ -139,7 +179,7 @@
 	                    </div>
 	                  </div>
 	                </div>
-	                <div class="col-md-12 mt-3">
+	                <div class="col-md-12 text-center">
 	                  <div class="form-group">
 	                    <input type="submit" value="Make a Reservation" class="btn btn-primary py-3 px-5">
 	                  </div>
@@ -148,12 +188,12 @@
 	            </form>
 	          </div>
           </div>
-          <div class="col-md-6 d-flex align-items-stretch pb-5 pb-md-0">
-						<div id="map"></div>
-					</div>
         </div>
 			</div>
-		</section>
+        </section>
+
+
+
 
     <footer class="ftco-footer ftco-bg-dark ftco-section">
       <div class="container-fluid px-md-5 px-3">
@@ -227,7 +267,7 @@
         </div>
       </div>
     </footer>
-  
+
 
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
@@ -250,6 +290,6 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="{{ asset('frontend/js/google-map.js') }}"></script>
   <script src="{{ asset('frontend/js/main.js') }}"></script>
-    
+
   </body>
 </html>

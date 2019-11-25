@@ -52,7 +52,7 @@ class MenusController extends Controller
         $slug = str_slug($request->food_name);
         if(isset($image)){
             $currentDate = Carbon::now()->toDateString();
-            $imagename = $slug.'-'.$currentDate.'-'.uniqid().'-'.$image->getClientOriginalExtension();
+            $imagename = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
 
             $path = $request->file('image')->storeAs('public/menus',$imagename);
         }
@@ -118,7 +118,7 @@ class MenusController extends Controller
         $menu = Menu::find($id);
         if (isset($image)) {
             $currentDate = Carbon::now()->toDateString();
-            $imagename = $slug . '-' . $currentDate . '-' . uniqid() . '-' . $image->getClientOriginalExtension();
+            $imagename = $slug . '-' . $currentDate . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
 
             $path = $request->file('image')->storeAs('public/menus', $imagename);
         } else {
