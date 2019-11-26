@@ -1,34 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>ERA Restaurant</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+@extends('layouts.main')
 
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Monoton&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Miss+Fajardose&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="{{ asset('frontend/css/open-iconic-bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/css/animate.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('frontend/css/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/css/owl.theme.default.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/css/magnific-popup.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('frontend/css/aos.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('frontend/css/ionicons.min.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap-datepicker.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/css/jquery.timepicker.css') }}">
-
-
-    <link rel="stylesheet" href="{{ asset('frontend/css/flaticon.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/css/icomoon.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
-  </head>
-  <body>
+@section('content')
     <div class="py-1 bg-black top">
     	<div class="container">
     		<div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
@@ -92,7 +64,6 @@
         </div>
         @foreach ($categories as $category)
 
-
             <div class="row">
                 <div class="col-md-6 col-lg-4 menu-wrap">
                     <div class="heading-menu text-center ftco-animate">
@@ -100,7 +71,7 @@
                     </div>
 
                     @foreach ($menus as $menu)
-                    @if ($menu->category == $category->category)
+                          @if ($menu->category == $category->category)
                            <div class="menus d-flex ftco-animate">
                                <div class="menu-img img" style="background-image: url(Storage/menus/{{ ($menu->image) }});"></div>
                                <div class="text">
@@ -116,9 +87,12 @@
                                 </div>
                             </div>
                         @endif
+
                     @endforeach
+
                 </div>
             </div>
+
         @endforeach
         </div>
         </section>
@@ -132,7 +106,7 @@
 		          	<span class="subheading">Book a table</span>
 		            <h2 class="mb-4">Make Reservation</h2>
 		          </div>
-                <form action="{{ route('order.store') }}" method="POST">
+                <form action="{{ route('payments.index') }}" method="POST">
                     @csrf
 	              <div class="row">
 	                <div class="col-md-6">
@@ -149,138 +123,79 @@
 	                </div>
 	                <div class="col-md-6">
 	                  <div class="form-group">
-	                    <label for="">Phone</label>
-	                    <input type="text" class="form-control" placeholder="Phone" required>
+	                    <label for="">Phone Number</label>
+	                    <input type="date" class="form-control" placeholder="Enter Your Phone Number" required>
 	                  </div>
 	                </div>
 	                <div class="col-md-6">
 	                  <div class="form-group">
-	                    <label for="">Phone</label>
-	                    <input type="text" class="form-control" id="book_date" placeholder="Date" required>
+	                    <label for="">Date</label>
+	                    <input type="text" class="form-control" id="book_date" placeholder="Choose a Date" required>
 	                  </div>
 	                </div>
 	                <div class="col-md-6">
 	                  <div class="form-group">
 	                    <label for="">Time</label>
-	                    <input type="Time" class="form-control" id="book_time" placeholder="Time" required>
+	                    <input type="time" class="form-control" id="book_time" placeholder=" Set your Time" required>
 	                  </div>
 	                </div>
 	                <div class="col-md-6">
 	                  <div class="form-group">
-	                    <label for="">Person</label>
+	                    <label for="">Number of People for Table</label>
 	                    <div class="select-wrap one-third">
 	                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
 	                      <select name="" id="" class="form-control">
-	                        <option value="">Person</option>
-	                        <option value="">1</option>
-	                        <option value="">2</option>
-	                        <option value="">3</option>
-	                        <option value="">4+</option>
+	                        <option value="">People</option>
+	                        <option value="1">1</option>
+	                        <option value="2">2</option>
+	                        <option value="3">3</option>
+	                        <option value="4">4</option>
+	                        <option value="5">5+</option>
 	                      </select>
 	                    </div>
 	                  </div>
 	                </div>
 	                <div class="col-md-12">
 	                  <div class="form-group">
-	                    <label for="">Person</label>
+	                    <label for="food_orders">Starter Options (Ctrl +Click to select more than one)</label>
 	                    <div class="select-wrap one-third">
-	                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-	                      <select name="" id="" class="form-control">
-	                        <option value="">Person</option>
-	                        <option value="">1</option>
-	                        <option value="">2</option>
-	                        <option value="">3</option>
-	                        <option value="">4+</option>
-	                      </select>
+                          <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                          <select name="food_orders" id="food_orders" class="form-control" multiple required>
+                            @foreach ($menus as $menu)
+                                @if ($menu->category == 'Starters')
+                                    <option value="{{ $menu->fodname }}">{{ $menu->foodname }}</option>
+                                @endif
+                            @endforeach
+                            <option value=""disabled >No more options Available</option>
+                          </select>
 	                    </div>
 	                  </div>
-	                </div>
-	                <div class="col-md-12 text-center">
+                    </div>
+                    <div class="col-md-12 mt-3">
 	                  <div class="form-group">
 	                    <input type="submit" value="Make a Reservation" class="btn btn-primary py-3 px-5">
 	                  </div>
 	                </div>
-	              </div>
-	            </form>
-	          </div>
-          </div>
-        </div>
-			</div>
         </section>
+@endsection
 
-
-
-
-    <footer class="ftco-footer ftco-bg-dark ftco-section">
-      <div class="container-fluid px-md-5 px-3">
-        <div class="row mb-5">
-          <div class="col-md-6 col-lg-3">
-            <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">ERA</h2>
-              <p>A time to be free from the tough</p>
-              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Open Hours</h2>
-              <ul class="list-unstyled open-hours">
-                <li class="d-flex"><span>Monday</span><span>09:00 - 23:00</span></li>
-                <li class="d-flex"><span>Tuesday</span><span>09:00 - 23:00</span></li>
-                <li class="d-flex"><span>Wednesday</span><span>09:00 - 23:00</span></li>
-                <li class="d-flex"><span>Thursday</span><span>09:00 - 23:00</span></li>
-                <li class="d-flex"><span>Friday</span><span>09:00 - 02:00</span></li>
-                <li class="d-flex"><span>Saturday</span><span>09:00 - 02:00</span></li>
-                <li class="d-flex"><span>Sunday</span><span> 09:00 - 23:00</span></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="ftco-footer-widget mb-4">
-            	<h2 class="ftco-heading-2">Newsletter</h2>
-            	<p>Far far away, behind the word mountains, far from the countries.</p>
-              <form action="#" class="subscribe-form">
-                <div class="form-group">
-                  <input type="text" class="form-control mb-2 text-center" placeholder="Enter email address">
-                  <input type="submit" value="Subscribe" class="form-control submit px-3">
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 text-center">
-          </div>
-        </div>
-      </div>
-    </footer>
-
-
-  <!-- loader -->
-  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-
-
-  <script src="{{ asset('frontend/js/jquery.min.js') }}"></script>
-  <script src="{{ asset('frontend/js/jquery-migrate-3.0.1.min.js') }}"></script>
-  <script src="{{ asset('frontend/js/popper.min.js') }}"></script>
-  <script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
-  <script src="{{ asset('frontend/js/jquery.easing.1.3.js') }}"></script>
-  <script src="{{ asset('frontend/js/jquery.waypoints.min.js') }}"></script>
-  <script src="{{ asset('frontend/js/jquery.stellar.min.js') }}"></script>
-  <script src="{{ asset('frontend/js/owl.carousel.min.js') }}"></script>
-  <script src="{{ asset('frontend/js/jquery.magnific-popup.min.js') }}"></script>
-  <script src="{{ asset('frontend/js/aos.js') }}"></script>
-  <script src="{{ asset('frontend/js/jquery.animateNumber.min.js') }}"></script>
-  <script src="{{ asset('frontend/js/bootstrap-datepicker.js') }}"></script>
-  <script src="{{ asset('frontend/js/jquery.timepicker.min.js') }}"></script>
-  <script src="{{ asset('frontend/js/scrollax.min.js') }}"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="{{ asset('frontend/js/google-map.js') }}"></script>
-  <script src="{{ asset('frontend/js/main.js') }}"></script>
-
-  </body>
-</html>
+@push('scripts')
+    <script src="{{ asset('frontend/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/jquery-migrate-3.0.1.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/popper.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/jquery.easing.1.3.js') }}"></script>
+    <script src="{{ asset('frontend/js/jquery.waypoints.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/jquery.stellar.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/aos.js') }}"></script>
+    <script src="{{ asset('frontend/js/jquery.animateNumber.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ asset('frontend/js/jquery.timepicker.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/scrollax.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/google-map.js') }}"></script>
+    <script src="{{ asset('frontend/js/main.js') }}"></script>
+    <script src="{{ asset('frontend/js/fabric.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/custom.js') }}"></script>
+    @endpush
